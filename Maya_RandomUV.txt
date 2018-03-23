@@ -1,0 +1,99 @@
+proc Random(string $UorV)
+{
+	float $random;
+	
+	string $aObj[] = `ls -sl`;
+
+	SelectTool; // avoiding "cant move in 3d view" warning
+	
+	for ($obj in $aObj)
+	{
+		if (`intField -query -value RUVintFieldGrid` == 0)
+		{
+			$random = rand (1); 
+			$random = (`PositiveNegative` + $random);
+		}
+		else
+		{
+			$random = (`PositiveNegative` + `RandFraction`);
+		}
+		
+		select $obj;
+		
+		PolySelectConvert 4;
+		polyEditUV $UorV $random;
+	}
+	
+	select $aObj;
+	
+	MoveTool; // avoiding "cant move in 3d view" warning
+}
+
+global proc RandomU()
+{
+	Random ("-uValue");
+}
+
+global proc RandomV()
+{
+	Random ("-vValue");
+}
+
+
+
+global proc float RandFraction()
+{
+	float $grid = `intField -query -value RUVintFieldGrid`;
+
+	float $fraction = (1 / $grid);
+
+	int $randMultiplier = rand ($grid + 2);
+
+	float $randFraction = ($fraction * $randMultiplier);
+
+	return $randFraction;
+}
+
+
+
+global proc string PositiveNegative()
+{
+	string $positiveNegative = "";
+	int $posNeg = `rand 2`;
+
+	if ($posNeg == 0)
+	{
+		$positiveNegative = "-";
+	}
+	
+	return $positiveNegative;
+}
+
+
+
+global proc RandomUVToolbox()
+{
+	string $window = "RandomUVWindow";
+	if (`window -exists $window` == 1)
+	{ 
+		deleteUI $window;
+	}
+	
+	window -title "Random UV" -s 1 -in RUV -rtf 1 -mnb 1 -mxb 1 $window;
+		columnLayout -adj 0 -rs 4;
+			rowColumnLayout -numberOfColumns 3 -cw 1 67 -cw 2 67 -cw 3 67;
+				button -label "Random U" -command RandomU;
+				button -label "Random UV" -command "RandomU; RandomV;";
+				button -label "Random V" -command RandomV;
+				setParent ..;
+			rowColumnLayout -numberOfColumns 2 -cs 1 40 -cw 1 90 -cw 2 30;
+				text -label "Grid (0 = no grid)" RUVtextGrid;
+				intField -value 0 -min 0 RUVintFieldGrid;
+				setParent ..;
+			setParent ..;
+		
+	showWindow $window;
+	window -e -h 92 -w 220 $window;
+}
+
+RandomUVToolbox;
