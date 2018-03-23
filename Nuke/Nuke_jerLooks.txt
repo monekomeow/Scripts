@@ -29,7 +29,7 @@ Group {
  PMContribution2 0.01
  addUserKnob {6 pmoff l Disable +STARTLINE}
  addUserKnob {20 endGroup_3 l endGroup n -1}
- addUserKnob {20 lensReflection l "Lens Reflection" t "Creates a fake lens flare by isolating the highlights, blurring them, and rotating them 180°." n 1}
+ addUserKnob {20 lensReflection l "Lens Reflection" t "Creates a fake lens flare by isolating the highlights, blurring them, and rotating them 180Â°." n 1}
  addUserKnob {7 LRintensity l intensity}
  LRintensity 0.015
  addUserKnob {14 LRblur l blur R 0 100}
