@@ -1,1 +1,1 @@
-# MayaScripts collected for Maya
+# Scripts collected for Maya and Nuke
