@@ -15,7 +15,7 @@ for value in randnum:
 	
 	extRand = random.uniform(1,3)
 	mc.select(currentObjSel[0] + '.f[' + str(value) + ']', r=True)
-	mc.polyExtrudeFacet(ltz = extRand, d=2)
+	mc.polyExtrudeFacet(ltz = extRand, d=1)
 	
 	for obj in range(1):
 		
