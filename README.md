@@ -1,0 +1,1 @@
+# MayaScripts collected for Maya
