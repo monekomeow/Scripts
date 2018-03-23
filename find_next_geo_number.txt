@@ -1,0 +1,16 @@
+selectedGrp=mc.ls(sl=True)[0]
+#grpLetter='C'
+numberIndex=8
+#grpWildcard='city_quad_'+grpLetter+'_section_19_city_block_06_*_geo_building_ctl_GRP'
+grpWildcard='city_quad_C_section_07_city_block_06_*_geo_building_ctl_GRP'
+allWildcard=mc.ls(grpWildcard)
+numberList=[]
+for x in allWildcard:
+    splitX=x.split('_')
+    number=int(splitX[numberIndex])
+    numberList.append(number)
+
+sortedList=sorted(numberList)
+lastNumber=sortedList[-1]
+newIndex=lastNumber+1
+print newIndex
