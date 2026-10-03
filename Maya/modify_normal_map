@@ -1,0 +1,13 @@
+#select your file node that is connected to your bump2d node and run the script
+
+from pymel.core import *
+def normalStrength():
+    myNormal = ls (sl=True)
+    myBump=listConnections( myNormal[0].outAlpha, d=True )
+    myBump[0].bumpDepth >> myNormal[0].colorGainR
+    myBump[0].bumpDepth >> myNormal[0].colorGainG
+    myBump[0].bumpDepth >> myNormal[0].colorGainB
+    
+    expression(ae=False, n=myNormal[0] + '_normalMapExpression' ,o=myNormal[0], s='colorOffsetR = (1 - colorGainR) * 0.5; \ncolorOffsetG = (1 - colorGainG) * 0.5; \ncolorOffsetB = (1 - colorGainB) * 1.0;' )
+    
+normalStrength()
